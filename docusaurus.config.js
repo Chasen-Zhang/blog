@@ -94,6 +94,27 @@ const config = {
               }
             ],
           },
+          {
+            title: 'DATABEND',
+            items: [
+              {
+                label: 'Databend',
+                to: 'https://databend.com',
+              },
+              {
+                label: 'Databend.rs',
+                to: 'https://databend.rs',
+              },
+              {
+                label: 'DatabendRepo',
+                to: 'https://github.com/datafuselabs/databend',
+              },
+              {
+                label: '3306π',
+                to: 'https://3306pai.com/',
+              }
+            ],
+          },
         ],
         copyright: `Copyright © ${new Date().getFullYear()} Chasen. Built with Docusaurus.`,
       },
