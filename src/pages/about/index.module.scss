@@ -17,6 +17,9 @@
         text-indent: 2rem;
       }
     }
+    .picDe{
+      padding-top: 15px;
+    }
     @include media{
       .picDe{
         width: 95%;

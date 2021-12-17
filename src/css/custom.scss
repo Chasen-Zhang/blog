@@ -29,8 +29,21 @@ body {
   --ifm-menu-color-active: #76aff7;
   --ifm-footer-background-color: #0a0d15;
 }
+.footer{
+  border-top: 1px solid rgba(112,155,231,.2);
+  padding-bottom: 8px;
+  @include media {
+    padding-bottom: mpx(10);
+  }
+}
 .footer--dark{
   background-color: #0a0d15;
+}
+.footer__col{
+  text-align: center;
+  @include media{
+    text-align: left;
+  }
 }
 html[data-theme='dark']{
   background-color: #0a0d15;
