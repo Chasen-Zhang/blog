@@ -30,6 +30,7 @@
       }
       @include media{
         margin-top: mpx(10);
+        margin-right: mpx(15);
       }
     }
     .arrow{
@@ -45,10 +46,17 @@
       }
     }
   }
+  @include media{
+    padding: 1rem!important;
+    .container{
+      padding: 0;
+    }
+  }
 }
 .section{
   padding-bottom: 11rem;
   @include media{
+
     padding-bottom: mpx(50);
   }
   background-color: $section-color;
