@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://your-docusaurus-test-site.com/blog</id>
+    <title>Chasen Blog</title>
+    <updated>2020-12-17T00:00:00.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://your-docusaurus-test-site.com/blog"/>
+    <subtitle>Chasen Blog</subtitle>
+    <icon>https://your-docusaurus-test-site.com/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[github action]]></title>
+        <id>github-action</id>
+        <link href="https://your-docusaurus-test-site.com/blog/github-action"/>
+        <updated>2020-12-17T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[eg1.]]></summary>
+        <content type="html"><![CDATA[<p>eg1.</p><pre><code>name: WEBSITE DEPLOY CI
+on:
+  push:
+    branches:
+      - main 
+      - feature-1.0
+    paths-ignore:
+      - README.md
+      - LICENSE
+ 
+jobs:
+  deploy_job:
+    runs-on: ubuntu-latest
+    name: build
+    steps:
+      # check out the repository
+      - name: Checkout    
+        uses: actions/checkout@v2
+ 
+      - name: Install Dependencies
+        run: yarn
+      - name: Build
+        run: yarn build
+ 
+      - name: deploy file to test server
+        if: github.ref == &#x27;refs/heads/feature-1.0&#x27;
+        uses: wlixcc/SFTP-Deploy-Action@v1.0 
+        with:  
+          username: &#x27;${{secrets.YOUR_WEBSITE_USER}}&#x27;
+          server: &#x27;${{ secrets.YOUR_WEBSITE_SERVER_IP }}&#x27;
+          ssh_private_key: ${{ secrets.YOUR_WEBSITE_PAGES_DEPLOY }}
+          local_path: &#x27;./build/*&#x27;
+          remote_path: ${{ secrets.YOUR_WEBSITE_REMOTE_PATH_DEV }}
+ 
+      - name: deploy file to prod server
+        if: github.ref == &#x27;refs/heads/main&#x27;
+        uses: wlixcc/SFTP-Deploy-Action@v1.0 
+        with:  
+          username: &#x27;${{secrets.YOUR_WEBSITE_USER}}&#x27;
+          server: &#x27;${{ secrets.YOUR_WEBSITE_SERVER_IP }}&#x27;
+          ssh_private_key: ${{ secrets.YOUR_WEBSITE_PAGES_DEPLOY }}
+          local_path: &#x27;./build/*&#x27;
+          remote_path: ${{ secrets.YOUR_WEBSITE_REMOTE_PATH_PROD }}
+</code></pre><p>eg2.</p><pre><code>name: DEPLOY CI - push to another rpo
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - README.md
+      - LICENSE
+ 
+jobs:
+  deploy_job:
+    runs-on: ubuntu-latest
+    name: build
+    steps:
+      # check out the repository
+      - name: Checkout    
+        uses: actions/checkout@v2
+ 
+      - name: Install Dependencies
+        run: yarn
+      - name: Build
+        run: yarn build
+      
+ 
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: &#x27;build&#x27;
+          destination-github-username:  ${{ secrets.DESTINATION_GITHUB_NAME }}
+          destination-repository-name: &#x27;zzzzz&#x27;
+          target-directory: &#x27;xxxx&#x27;
+          user-email: ${{ secrets.UESR_EMAIL }}
+          target-branch: gh-pages
+</code></pre>]]></content>
+        <author>
+            <name>chasen</name>
+        </author>
+    </entry>
+</feed>
