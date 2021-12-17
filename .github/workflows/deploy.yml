@@ -1,4 +1,4 @@
-name: 3306π DEPLOY CI
+name: blog DEPLOY CI
 on:
   push:
     branches:
