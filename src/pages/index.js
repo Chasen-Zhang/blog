@@ -1,0 +1,43 @@
+import React from 'react';
+import clsx from 'clsx';
+import Layout from '@theme/Layout';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Texty from 'rc-texty';
+import 'rc-texty/assets/index.css';
+import styles from './index.module.scss';
+import Link from '@docusaurus/Link';
+
+function HomepageHeader() {
+  const {siteConfig} = useDocusaurusContext();
+  return (
+    <>
+      <section className={clsx('hero hero--primary', styles.heroBanner, styles.bannerItemHeight)}>
+        <div className={clsx('container', styles.container)}>
+          <h1 className={clsx('hero__title', styles.heroTitle)}><Texty>{siteConfig.title}</Texty></h1>
+          <p className={clsx('hero__subtitle', styles.heroSubTitle)}>{siteConfig.tagline}</p>
+          <Link
+            className={clsx("button button--secondary button--lg", styles.link)}
+            to="/about">
+              About Me
+          </Link>
+          <Link
+            className={clsx("button button--secondary button--lg", styles.link)}
+            to="/blog">
+            Blog
+          </Link>
+        </div>
+      </section>
+    </>
+  );
+}
+
+export default function Home() {
+  const {siteConfig} = useDocusaurusContext();
+  return (
+    <Layout
+      title={`${siteConfig.title}`}
+      description="I love the world">
+      <HomepageHeader />
+    </Layout>
+  );
+}

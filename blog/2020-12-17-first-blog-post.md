@@ -1,0 +1,93 @@
+---
+slug: github-action
+title: github action
+authors:
+  name: chasen
+tags: [ci, deploy]
+---
+eg1.
+```
+name: WEBSITE DEPLOY CI
+on:
+  push:
+    branches:
+      - main 
+      - feature-1.0
+    paths-ignore:
+      - README.md
+      - LICENSE
+ 
+jobs:
+  deploy_job:
+    runs-on: ubuntu-latest
+    name: build
+    steps:
+      # check out the repository
+      - name: Checkout    
+        uses: actions/checkout@v2
+ 
+      - name: Install Dependencies
+        run: yarn
+      - name: Build
+        run: yarn build
+ 
+      - name: deploy file to test server
+        if: github.ref == 'refs/heads/feature-1.0'
+        uses: wlixcc/SFTP-Deploy-Action@v1.0 
+        with:  
+          username: '${{secrets.YOUR_WEBSITE_USER}}'
+          server: '${{ secrets.YOUR_WEBSITE_SERVER_IP }}'
+          ssh_private_key: ${{ secrets.YOUR_WEBSITE_PAGES_DEPLOY }}
+          local_path: './build/*'
+          remote_path: ${{ secrets.YOUR_WEBSITE_REMOTE_PATH_DEV }}
+ 
+      - name: deploy file to prod server
+        if: github.ref == 'refs/heads/main'
+        uses: wlixcc/SFTP-Deploy-Action@v1.0 
+        with:  
+          username: '${{secrets.YOUR_WEBSITE_USER}}'
+          server: '${{ secrets.YOUR_WEBSITE_SERVER_IP }}'
+          ssh_private_key: ${{ secrets.YOUR_WEBSITE_PAGES_DEPLOY }}
+          local_path: './build/*'
+          remote_path: ${{ secrets.YOUR_WEBSITE_REMOTE_PATH_PROD }}
+```
+
+
+eg2.
+```
+name: DEPLOY CI - push to another rpo
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - README.md
+      - LICENSE
+ 
+jobs:
+  deploy_job:
+    runs-on: ubuntu-latest
+    name: build
+    steps:
+      # check out the repository
+      - name: Checkout    
+        uses: actions/checkout@v2
+ 
+      - name: Install Dependencies
+        run: yarn
+      - name: Build
+        run: yarn build
+      
+ 
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: 'build'
+          destination-github-username:  ${{ secrets.DESTINATION_GITHUB_NAME }}
+          destination-repository-name: 'zzzzz'
+          target-directory: 'xxxx'
+          user-email: ${{ secrets.UESR_EMAIL }}
+          target-branch: gh-pages
+```
