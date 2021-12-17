@@ -2,6 +2,11 @@
   padding-top: 20px;
   .me{
     display: block;
+    border-radius: 6px;
+    box-shadow:
+       inset 0 3em 3em rgba(0,0,0,0.1),
+             0 0  0 2px $databend-blue,
+             0.3em 0.3em 1em rgba(0,0,0,0.2);
     width: 600px;
     @include media{
       width: 95%;
