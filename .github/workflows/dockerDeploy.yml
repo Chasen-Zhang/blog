@@ -42,8 +42,13 @@ jobs:
           password: ${{ secrets.ALI_DOCKER_HUB_PWD }}
           port: ${{ secrets.ALI_SERVER_PORT }}
           script: |
-           
+            if [[ -n $(docker ps -q -f "name=^blog-page$") ]];then
+              docker stop blog-page
+              docker rm blog-page
+            else
+              echo "blog-page don't exist"
+            fi
             docker login -u ${{ secrets.ALI_DOCKER_HUB_USN }} -p ${{ secrets.ALI_DOCKER_HUB_PWD }} ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}
             
-            docker pull ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/chasenzh/chasenzh-repository
-            docker run -d -p 80:80 --name=blog-page ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/chasenzh/chasenzh-repository
+            docker pull ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/chasenzh/chasenzh-repository:tag
+            docker run -d -p 80:80 --name=blog-page ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/chasenzh/chasenzh-repository:tag
