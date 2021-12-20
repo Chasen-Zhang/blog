@@ -38,8 +38,12 @@ jobs:
           password: ${{ secrets.ALI_DOCKER_HUB_PWD }}
           port: ${{ secrets.ALI_SERVER_PORT }}
           script: |
-            docker stop blog-page
-            docker container rm blog-page
+            if [ "$( docker container inspect -f '{{.State.Running}}' blog-page )" == "true" ]; then
+              docker stop blog-page
+              docker container rm blog-page
+            else
+              echo "no container blog-page creating...."
+            if
             docker login -u ${{ secrets.ALI_DOCKER_HUB_USN }} -p ${{ secrets.ALI_DOCKER_HUB_PWD }} ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}
             
             docker pull ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/chasenzh/chasenzh-repository
