@@ -11,18 +11,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Dockerfile
-        uses: actions/checkout@v2
-      # 使用Docker官方制作的action
-      # https://github.com/marketplace/actions/build-and-push-docker-images
-      - name: Build and Push Docker Iamge
-        uses: docker/build-push-action@v1
-        with: 
-          registry: ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}
-          username: ${{ secrets.ALI_DOCKER_HUB_USN }}
-          password: ${{ secrets.ALI_DOCKER_HUB_PWD }}
-          repository: chasenzh/chasenzh-repository
-          tag_with_sha: true
+      # - name: Checkout Dockerfile
+      #   uses: actions/checkout@v2
+      # # 使用Docker官方制作的action
+      # # https://github.com/marketplace/actions/build-and-push-docker-images
+      # - name: Build and Push Docker Iamge
+      #   uses: docker/build-push-action@v1
+      #   with: 
+      #     registry: ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}
+      #     username: ${{ secrets.ALI_DOCKER_HUB_USN }}
+      #     password: ${{ secrets.ALI_DOCKER_HUB_PWD }}
+      #     repository: chasenzh/chasenzh-repository
+      #     tag_with_sha: true
 
       # 使用Aliyun操作指南提供的命令
       # - name: Build Docker image
