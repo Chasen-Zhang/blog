@@ -23,7 +23,7 @@ jobs:
           password: ${{ secrets.ALI_DOCKER_HUB_PWD }}
           repository: chasenzh/chasenzh-repository
           tag_with_sha: true
-          path: 'docker'
+          path: '/'
 
       # 使用Aliyun操作指南提供的命令
       # - name: Build Docker image
