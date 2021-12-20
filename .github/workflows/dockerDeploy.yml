@@ -6,12 +6,6 @@ on:
     paths:
       - README.md
       - LICENSE
-
-defaults:
-  run:
-    shell: bash
-    working-directory: './'
-
 jobs:
   build:
     runs-on: ubuntu-latest
