@@ -45,7 +45,7 @@ jobs:
             if [[ -n $(docker ps -q -f "name=^blog-page$") ]];then
               docker stop blog-page
               docker rm blog-page
-              docker rmi blog-page
+              docker rmi ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/chasenzh/chasenzh-repository
             else
               echo "blog-page don't exist"
             fi
