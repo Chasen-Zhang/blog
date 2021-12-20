@@ -34,3 +34,17 @@ jobs:
       #     docker login -u ${{ secrets.ALI_DOCKER_HUB_USN }} -p ${{ secrets.ALI_DOCKER_HUB_PWD }} ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}
       #     docker tag locale ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/chasenzh/chasenzh-repository:tag
       #     docker push ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/chasenzh/chasenzh-repository:tag
+      - name: Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.ALI_SERVER }}
+          username: ${{ secrets.ALI_USERNAME }}
+          password: ${{ secrets.ALI_DOCKER_HUB_PWD }}
+          port: ${{ secrets.ALI_SERVER_PORT }}
+          script: |
+            docker stop $(docker ps --filter ancestor=${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/chasenzh/chasenzh-repository -q)
+            docker rm -f $(docker ps -a --filter ancestor=${{ secrets.REGISTRY }}/chasenzh/chasenzh-repository:latest -q)
+            docker rmi -f $(docker images  ${{ secrets.REGISTRY }}/chasenzh/chasenzh-repository:latest -q)
+            docker login --username=${{ secrets.ALI_DOCKER_HUB_USN }} --password ${{ secrets.ALI_DOCKER_HUB_PWD }} {{secrets.ALI_DOCKER_HUB_REGISTRY}}
+            docker pull ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/chasenzh/chasenzh-repository:latest
+            docker run -d -p 80:80 ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/chasenzh/chasenzh-repository:latest
