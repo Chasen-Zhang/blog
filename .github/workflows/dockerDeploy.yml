@@ -48,7 +48,7 @@ jobs:
             else
               echo "blog-page don't exist"
             fi
-            docker login --username ${{ secrets.ALI_DOCKER_HUB_USN }} -password {{ secrets.ALI_DOCKER_HUB_PWD }} ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}
+            docker login --username=${{ secrets.ALI_DOCKER_HUB_USN }} -password={{ secrets.ALI_DOCKER_HUB_PWD }} ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}
             
             docker pull ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/chasenzh/chasenzh-repository
             docker run -d -p 80:80 --name=blog-page ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/chasenzh/chasenzh-repository
