@@ -5,6 +5,8 @@ authors:
   name: chasen
 tags: [ci, deploy]
 ---
+github action 在线自动部署自动部署
+<!--truncate-->
 eg1.
 ```
 name: WEBSITE DEPLOY CI
