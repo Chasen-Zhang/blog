@@ -41,7 +41,7 @@ jobs:
           username: ${{ secrets.ALI_USERNAME }}
           password: ${{ secrets.ALI_DOCKER_HUB_PWD }}
           port: ${{ secrets.ALI_SERVER_PORT }}
-          script: |
+          run: |
             if [[ -n $(docker ps -q -f "name=^blog-page$") ]];then
               docker stop blog-page
               docker rm blog-page
