@@ -50,5 +50,5 @@ jobs:
             fi
             docker login -u ${{ secrets.ALI_DOCKER_HUB_USN }} -p ${{ secrets.ALI_DOCKER_HUB_PWD }} ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}
             
-            docker pull ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}
-            docker run -d -p 80:80 --name=blog-page ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}
+            docker pull registry.cn-shenzhen.aliyuncs.com/chasenzh/chasenzh-repository
+            docker run -d -p 80:80 --name=blog-page registry.cn-shenzhen.aliyuncs.com/chasenzh/chasenzh-repository
