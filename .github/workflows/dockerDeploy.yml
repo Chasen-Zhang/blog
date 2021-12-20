@@ -42,9 +42,8 @@ jobs:
           password: ${{ secrets.ALI_DOCKER_HUB_PWD }}
           port: ${{ secrets.ALI_SERVER_PORT }}
           script: |
-            docker stop $(docker ps --filter ancestor=${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/chasenzh/chasenzh-repository -q)
-            docker rm -f $(docker ps -a --filter ancestor=${{ secrets.REGISTRY }}/chasenzh/chasenzh-repository:latest -q)
-            docker rmi -f $(docker images  ${{ secrets.REGISTRY }}/chasenzh/chasenzh-repository:latest -q)
+            docker stop blog-page
+            docker rm blog-page
             docker login --username=${{ secrets.ALI_DOCKER_HUB_USN }} --password ${{ secrets.ALI_DOCKER_HUB_PWD }} {{secrets.ALI_DOCKER_HUB_REGISTRY}}
             docker pull ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/chasenzh/chasenzh-repository:latest
-            docker run -d -p 80:80 ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/chasenzh/chasenzh-repository:latest
+            docker run -d -p 80:80 --name=blog-page ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/chasenzh/chasenzh-repository:latest
