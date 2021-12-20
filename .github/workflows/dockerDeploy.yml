@@ -42,12 +42,12 @@ jobs:
           password: ${{ secrets.ALI_DOCKER_HUB_PWD }}
           port: ${{ secrets.ALI_SERVER_PORT }}
           script: |
-            if command -v "docker inspect blog-page" ; then
+            if [[ -n $(docker ps -q -f "name=^blog-page$") ]];then
               docker stop blog-page
               docker rm blog-page
             else
               echo "docker don't exist"
             fi
-            docker login --username=${{ secrets.ALI_DOCKER_HUB_USN }} --password ${{ secrets.ALI_DOCKER_HUB_PWD }} {{ secrets.ALI_DOCKER_HUB_REGISTRY }}
+            docker login -u ${{ secrets.ALI_DOCKER_HUB_USN }} -p ${{ secrets.ALI_DOCKER_HUB_PWD }} {{ secrets.ALI_DOCKER_HUB_REGISTRY }}
             docker pull ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/chasenzh/chasenzh-repository:latest
             docker run -d -p 80:80 --name=blog-page ${{ secrets.ALI_DOCKER_HUB_REGISTRY }}/chasenzh/chasenzh-repository:latest
