@@ -45,6 +45,7 @@ jobs:
             if [[ -n $(docker ps -q -f "name=^blog-page$") ]];then
               docker stop blog-page
               docker rm blog-page
+              docker rmi blog-page
             else
               echo "blog-page don't exist"
             fi
