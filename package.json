@@ -22,7 +22,9 @@
     "prism-react-renderer": "^1.2.1",
     "rc-texty": "^0.2.0",
     "react": "^17.0.1",
+    "react-audio-player": "^0.17.0",
     "react-dom": "^17.0.1",
+    "react-use": "^17.3.1",
     "sass": "^1.45.0"
   },
   "browserslist": {
