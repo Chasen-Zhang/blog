@@ -11,6 +11,11 @@
   height: 700px;
   display: flex;
   justify-content: center;
+  @include media {
+    top: mpx(60);
+    width: mpx(400);
+    height: mpx(800);
+  }
 }
 .jiangxiaoqian{
   font-size: 40px;
@@ -18,6 +23,9 @@
   position: relative;
   top: -100px;
   left: 20px;
+  @include media{
+    top: mpx(0);
+  }
 }
 @keyframes wiggle {
   0% { transform: rotate(0deg); }
@@ -44,6 +52,11 @@
   margin-bottom: 40px;
   clip-path: polygon(50% 0, 65% 40%, 100% 40%, 72% 60%,
           85% 100%, 50% 75%, 15% 100%, 28% 60%, 0 40%, 35% 40%);
+  @include media {
+    margin-bottom: 0;
+    width: mpx(25);
+    height: mpx(25);
+  }
 }
 .tree li{
   position: absolute;
@@ -54,6 +67,10 @@
   animation: swing 4s ease-in-out infinite;
   height: calc(var(--i)*4px);
   animation-delay:calc(var(--i)*-0.23s);
+  @include media {
+    width: mpx(1);
+    top: mpx(20);
+  }
 }
 @keyframes swing{
   0%,
@@ -77,6 +94,12 @@
   bottom: 1px;
   width: 3px;
   height: 3px;
+  @include media {
+    width: mpx(3);
+    height: mpx(3);
+    left: -mpx(1);
+    bottom: mpx(1);
+  }
 }
 .tree li:nth-child(4n)::before{
   background-color: #D8334A;

@@ -19,7 +19,7 @@ export default function Christmas() {
         <div className={style.chunk}></div>
         {
           array.map((item)=> {
-            return <li Style={`--i:${item}`} className={style.li} key={item}></li>
+            return <li StylE={`--i:${item}`} className={style.li} key={item}></li>
           })
         }
       </ul>
