@@ -31,14 +31,22 @@ const config = {
         },
         theme: {
           customCss: require.resolve('./src/css/custom.scss'),
-        },
+        }
       }),
+     
     ],
   ],
   plugins: [
     'docusaurus-plugin-sass',
     './src/plugins/pxToVw',
-    './src/plugins/globalSassVarInject'
+    './src/plugins/globalSassVarInject',
+    [
+      '@docusaurus/plugin-google-gtag',
+      {
+        trackingID: 'G-50LP8V55V8',
+        anonymizeIP: true,
+      },
+    ],
   ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
