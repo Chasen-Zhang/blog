@@ -7,14 +7,17 @@ export default function Christmas() {
   useMount(() => {
     // document.getElementById('mp3').play()
   });
+  const playMp3 = ()=>{
+    document.getElementById('mp3').play()
+  }
   const array = Array.from({ length: 129 }, (v, i) => i);
   return(
     <>
-      <ul className={style.tree}>
+      <ul className={style.tree} onClick={playMp3}>
         <p className={clsx(style.jiangxiaoqian, style.wiggle)}>蒋晓茜 圣诞快乐！</p>
-        {/* <audio preload={true} id='mp3' style={{opcity:0.1}} controls="controls" autoPlay>
+        <audio preload={true} id='mp3' style={{opcity:0.1}} controls="controls" loop autoPlay>
           <source src={mp3} type="audio/ogg"/>
-        </audio> */}
+        </audio>
         <div className={style.star}></div>
         <div className={style.chunk}></div>
         {
