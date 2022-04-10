@@ -84,3 +84,24 @@ html[data-theme='dark'] .docusaurus-highlight-code-line {
 .navbar__toggle{
   color: $databend-blue;
 }
+span.shinning {
+  background: linear-gradient(to right, blue, orange);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+span.shinning1 {
+  background: linear-gradient(to right, orange, blue);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+span.shinning2 {
+  background: linear-gradient(to left, red, rgb(109, 128, 0));
+  -webkit-background-clip: text;
+  color: transparent;
+}
+span.shinning3 {
+  background: linear-gradient(to right, rgb(2, 35, 78), rgb(127, 5, 131));
+  -webkit-background-clip: text;
+  color: transparent;
+}
