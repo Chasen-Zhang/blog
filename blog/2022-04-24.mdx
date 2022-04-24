@@ -1,0 +1,53 @@
+---
+slug: performance
+title: performance之modulepreload
+authors:
+  name: chasen
+tags: [performance, web]
+---
+![An image from the static](/img/time.jpeg)
+## 遇到的问题
+最近在做项目的时候遇到一个问题：我们在用组件式开发单页应用的时候，往往会想到用路由懒加载的方式或者说是动态加载页面。vue使用
+``` js
+  import('xxxx')
+```
+而react使用 lazy
+``` js
+  lazy(() => import('xxxx'));
+```
+大概原理都是动态的加载 script 标签。本来这样的方式挺好，很符合人们的直觉，不用的页面没必要加载，等使用的的时候在加载相应页面。然而这样的方式真的是好的吗？没有体验上的瓶颈吗，未必吧，肯定动态加载的速度应该也让你干到非常的恼怒。vue还好，页面加载之间不会有一个空白，然而 react 在这方面做的并不是很好，个人观点。
+
+在路由切换之间，react 是会有一段页面空白时间，假如此时页面是懒加载，那么等待的时间应该是让人有些尴尬，耗时会很长。网速慢的情况下更甚，假如没有设置cdn，那就 game over 了。
+基于这样出现这样的问题，我想到了组件预加载。有人会说，本来就是懒加载了，那么预加载还有意义吗？有，当然有。
+
+之前大家肯定有听说过 preload 等其他相关预资源请求吧，这些解决的问题确实也是这样，但是我们希望有个更好的方式。可以使用浏览器原生的能力。还好，新出来的 modulepreload 可以完全释放浏览器原生的能力。话不多说，我希望的效果是这样：
+
+![An image from the static](/img/modulepreload.png)
+关于 modulepreload 的详细解释可以参考这篇：
+https://developer.chrome.com/blog/modulepreload/
+
+## 解决方案
+我现在使用的是 vite + ts + react 来安排项目架构。关于 vite 其实有很多坑，我们下次详细说一下vite有哪些坑。
+ 
+我期望的是打包之后吧可以把 js 和 css 往 index.html里根据打包结果自动生成link标签，并且type属性设置为 modulepreload。这个时候需要自定义vite-plugins来执行这一步，在github中，我找到一个开源项目满足我的需求，只要稍微改一改就可以用了。
+github地址：https://github.com/jarlef/vite-plugin-preload
+但是有个问题，他依赖了一个报canvas，下载一直报错。所以我基于这个项目，根据自己的实际情况做了一些裁剪和增加。
+
+使用方式
+``` js
+import preload from './src/plugins/vite-plugin-preload/index';
+export default defineConfig({
+  plugins: [
+    react(),
+    preload(),
+  ]
+})
+```
+从效果来看，页面加载时间极大的提升了，页面过渡没有了空白时间。
+
+## 权衡
+但是有个问题：确实加载了不经常访问的页面，这些页面按道理是不需要加载的。有没有什么更好的方法呢？我提供一个思路，应该是考虑可配置的预加载，比如访问频率很高的，我就优先配置预加载。而几十年不会访问到的页面，我们还是实行懒加载，这样也省去了带宽。所以这些东西是有利有弊的。看大家在项目中是怎么去权衡的。我是受够了页面过渡时会有一段时间的空白。所以我现在全部预加载了。但是这样还是不好，随着项目的增大，页面的增加，都预加载的话肯定也不现实，所以还是要根据优先级去加载。
+
+
+## 接下来
+接下来就是要做定制的预加载。
