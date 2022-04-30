@@ -1,6 +1,6 @@
 ---
 slug: performance
-title: performance之modulepreload
+title: Performance之modulepreload
 authors:
   name: chasen
 tags: [performance, web]
@@ -15,6 +15,7 @@ tags: [performance, web]
 ``` js
   lazy(() => import('xxxx'));
 ```
+<!--truncate-->
 大概原理都是动态的加载 script 标签。本来这样的方式挺好，很符合人们的直觉，不用的页面没必要加载，等使用的的时候在加载相应页面。然而这样的方式真的是好的吗？没有体验上的瓶颈吗，未必吧，肯定动态加载的速度应该也让你干到非常的恼怒。vue还好，页面加载之间不会有一个空白，然而 react 在这方面做的并不是很好，个人观点。
 
 在路由切换之间，react 是会有一段页面空白时间，假如此时页面是懒加载，那么等待的时间应该是让人有些尴尬，耗时会很长。网速慢的情况下更甚，假如没有设置cdn，那就 game over 了。
