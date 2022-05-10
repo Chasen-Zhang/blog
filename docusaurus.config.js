@@ -27,7 +27,9 @@ const config = {
           editUrl: 'https://github.com/facebook/docusaurus/edit/main/website/',
         },
         blog: {
-          showReadingTime: true
+          showReadingTime: true,
+          blogSidebarTitle: 'All posts',
+          blogSidebarCount: 'ALL',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.scss'),
