@@ -14,6 +14,7 @@ import TOC from '@theme/TOC';
 import { DiscussionEmbed } from 'disqus-react'
 
 function BlogPostPage(props) {
+  
   const {content: BlogPostContents, sidebar} = props;
   const {
     // TODO this frontmatter is not validated/normalized, it's the raw user-provided one. We should expose normalized one too!
@@ -21,13 +22,14 @@ function BlogPostPage(props) {
     assets,
     metadata,
   } = BlogPostContents;
-  const {title, description, nextItem, prevItem, date, tags, authors} =
+  const {title, description, nextItem, prevItem, date, tags, authors, slug} =
     metadata;
   const {
     hide_table_of_contents: hideTableOfContents,
     keywords,
     toc_min_heading_level: tocMinHeadingLevel,
     toc_max_heading_level: tocMaxHeadingLevel,
+    no_comments
   } = frontMatter;
   const image = assets.image ?? frontMatter.image;
   return (
