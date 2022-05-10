@@ -1,12 +1,12 @@
 ---
 slug: performance
-title: Performance之modulepreload
+title: 5.Performance之modulepreload
 authors:
   name: chasen
 tags: [performance, web]
 ---
 ![An image from the static](/img/time.jpeg)
-## 遇到的问题
+### 遇到的问题
 最近在做项目的时候遇到一个问题：我们在用组件式开发单页应用的时候，往往会想到用路由懒加载的方式或者说是动态加载页面。vue使用
 ``` js
   import('xxxx')
@@ -27,7 +27,7 @@ tags: [performance, web]
 关于 modulepreload 的详细解释可以参考这篇：
 https://developer.chrome.com/blog/modulepreload/
 
-## 解决方案
+### 解决方案
 我现在使用的是 vite + ts + react 来安排项目架构。关于 vite 其实有很多坑，我们下次详细说一下vite有哪些坑。
  
 我期望的是打包之后吧可以把 js 和 css 往 index.html里根据打包结果自动生成link标签，并且type属性设置为 modulepreload。这个时候需要自定义vite-plugins来执行这一步，在github中，我找到一个开源项目满足我的需求，只要稍微改一改就可以用了。
@@ -46,9 +46,9 @@ export default defineConfig({
 ```
 从效果来看，页面加载时间极大的提升了，页面过渡没有了空白时间。
 
-## 权衡
+### 权衡
 但是有个问题：确实加载了不经常访问的页面，这些页面按道理是不需要加载的。有没有什么更好的方法呢？我提供一个思路，应该是考虑可配置的预加载，比如访问频率很高的，我就优先配置预加载。而几十年不会访问到的页面，我们还是实行懒加载，这样也省去了带宽。所以这些东西是有利有弊的。看大家在项目中是怎么去权衡的。我是受够了页面过渡时会有一段时间的空白。所以我现在全部预加载了。但是这样还是不好，随着项目的增大，页面的增加，都预加载的话肯定也不现实，所以还是要根据优先级去加载。
 
 
-## 接下来
+### 接下来
 接下来就是要做定制的预加载。

@@ -1,6 +1,6 @@
 ---
 slug: publish-to-npm
-title: Github action publish package to NPM
+title: 6.Github action publish package to NPM
 authors:
   name: chasen
 tags: [ci]
@@ -10,10 +10,10 @@ tags: [ci]
 Picture from: <a href="https://www.tukuppt.com/soback/pandeng.html">details</a>
 <!--truncate-->
 
-## 引出
+### 引出
 之前很少自己发包到开源社区而且大多数时间是参与别人的开源项目，一直受益于开源社区。想着自己如果有一些公共的代码也方便别人使用。我就先建了一个小仓库 copyforjs (<a href="https://github.com/Chasen-Zhang/copyforjs">仓库</a>), 是一个复制到粘贴板的小功能，之前使用别人的库发现兼容性做的不好，并且很复杂。功能简单，只是想借着这个库使用下 github action 自动打包发布到npm，虽然感觉很简单，但是还是中间踩了一些坑。把走过的坑记录一下，也算是一步步的帮自己扫盲。
 
-## 概览
+### 概览
 workflow
 ``` yml
 name: Public Npm
@@ -89,7 +89,7 @@ package.json
 }
 
 ```
-## 说明
+### 说明
 1、GITHUB_TOKEN: Personal access tokens(PAT)  https://github.com/settings/tokens 中配置
 
 2、NPM_AUTH_TOKEN: npm token 在npm网站根据下图配置 (我选择的是Automation, publish 亦可), 拿到的这个token需要在github中在当前项目中点击settings去设置secrets

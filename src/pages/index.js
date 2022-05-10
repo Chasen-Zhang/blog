@@ -21,13 +21,13 @@ function HomepageHeader() {
           <p className={clsx('hero__subtitle', styles.heroSubTitle)}>来都来了，许个愿吧😁</p>
           <Link
             className={clsx("button button--secondary button--lg", styles.link)}
-            to="/about">
-              About Me
+            to="/blog">
+            Blog
           </Link>
           <Link
             className={clsx("button button--secondary button--lg", styles.link)}
-            to="/blog">
-            Blog
+            to="/about">
+              About Me
           </Link>
         </div>
       </div>
